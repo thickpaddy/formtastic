@@ -73,7 +73,7 @@ module Formtastic
       # TODO reset_action class?
       def to_html
         wrapper do
-          template.hidden_field_tag(hidden_field_name, url) + template.link_to(text, url, button_html)
+          template.hidden_field_tag(hidden_field_name, template.url_for(url)) + template.link_to(text, url, button_html)
         end
       end
       
