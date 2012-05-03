@@ -73,13 +73,19 @@ module Formtastic
       # TODO reset_action class?
       def to_html
         wrapper do
-          template.link_to(text, url, button_html)
+          template.hidden_field_tag(hidden_field_name, url) + template.link_to(text, url, button_html)
         end
       end
       
       def url
         return options[:url] if options.key?(:url)
+        return template.params[hidden_field_name] if template.respond_to?(:params) && template.params[hidden_field_name].present?
         :back
+      end
+
+      private
+      def hidden_field_name
+        "#{object_name}_#{method}_action_url"
       end
 
     end
